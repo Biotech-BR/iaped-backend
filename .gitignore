@@ -1,0 +1,31 @@
+# ➤ Byte‑compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# ➤ Virtual env
+.venv/
+venv/
+env/
+
+# ➤ Django stuff:
+*.sqlite3
+db.sqlite3
+
+# ➤ Migrations (se você quiser versionar migrações, remova estas linhas)
+*/migrations/*.py
+*/migrations/__pycache__/
+
+# ➤ Environment variables
+.env
+
+# ➤ Firebase Admin SDK
+iapedsystem-firebase-adminsdk-*.json
+
+# ➤ OS files
+.DS_Store
+Thumbs.db
+
+# ➤ IDE
+.vscode/
+.idea/
