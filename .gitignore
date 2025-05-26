@@ -20,7 +20,7 @@ db.sqlite3
 .env
 
 # ➤ Firebase Admin SDK
-iapedsystem-firebase-adminsdk-*.json
+iaped-system-firebase-adminsdk-fbsvc-f99fce94a8.json
 
 # ➤ OS files
 .DS_Store
