@@ -17,8 +17,8 @@ class FirebaseAuthentication(authentication.BaseAuthentication):
         token = header.split(" ",1)[1]
         try:
             decoded = fb_auth.verify_id_token(token)
-        except:
-            raise exceptions.AuthenticationFailed("Token inválido ou expirado")
+        except Exception as e:
+            raise exceptions.AuthenticationFailed(f"Token inválido ou expirado: {str(e)}")
         uid = decoded.get("uid")
         user, _ = User.objects.get_or_create(username=uid)
         return (user, None)
