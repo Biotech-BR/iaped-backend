@@ -1,0 +1,49 @@
+services:
+  web:
+    build: .
+    hostname: iaped-system
+    container_name: iaped-system
+    volumes:
+      - .:/app
+    ports:
+      - 8000:8000
+    environment:
+      - DEBUG=False
+      - SECRET_KEY=django-insecure-fallback
+      - ALLOWED_HOSTS=0.0.0.0
+      - CORS_ALLOWED_ORIGINS=*,
+      - FIREBASE_ADMIN_CREDENTIALS=./firebase-admin-key.json
+      - POSTGRES_USER=iaped-system
+      - POSTGRES_PASSWORD=iaped-system
+      - POSTGRES_DB=iaped-system
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - traefik.enable=true
+      - traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https
+      - traefik.http.routers.<unique_router_name>.middlewares=redirect-to-https
+      - traefik.http.routers.<unique_router_name>.entryPoints=http
+      - 'caddy_0.encode=zstd gzip'
+      - 'caddy_0.handle_path.0_reverse_proxy={{upstreams 8000}}'
+      - 'caddy_0.handle_path=/*'
+      - caddy_0.header=-Server
+    depends_on:
+      - postgres
+  
+  postgres:
+    image: postgres:16
+    hostname: iaped-system-postgres
+    container_name: iaped-system-postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=iaped-system
+      - POSTGRES_PASSWORD=iaped-system
+      - POSTGRES_DB=iaped-system
+    ports:
+      - 5432:5432
+    
+
+volumes:
+  postgres_data: {}
+  

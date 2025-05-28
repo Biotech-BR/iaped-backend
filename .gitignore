@@ -7,6 +7,7 @@ __pycache__/
 .venv/
 venv/
 env/
+.env/
 
 # ➤ Django stuff:
 *.sqlite3
@@ -29,3 +30,6 @@ Thumbs.db
 # ➤ IDE
 .vscode/
 .idea/
+
+staticfiles/
+firebase-admin-key.json
