@@ -6,7 +6,7 @@ services:
     volumes:
       - .:/app
     ports:
-      - 8000:8000
+      - 8084:8000
     environment:
       - DEBUG=False
       - SECRET_KEY=django-insecure-fallback
@@ -24,12 +24,12 @@ services:
       - traefik.http.routers.<unique_router_name>.middlewares=redirect-to-https
       - traefik.http.routers.<unique_router_name>.entryPoints=http
       - 'caddy_0.encode=zstd gzip'
-      - 'caddy_0.handle_path.0_reverse_proxy={{upstreams 8000}}'
+      - 'caddy_0.handle_path.0_reverse_proxy={{upstreams 8084}}'
       - 'caddy_0.handle_path=/*'
       - caddy_0.header=-Server
     depends_on:
       - postgres
-  
+
   postgres:
     image: postgres:16
     hostname: iaped-system-postgres
@@ -42,8 +42,7 @@ services:
       - POSTGRES_DB=iaped-system
     ports:
       - 5432:5432
-    
+
 
 volumes:
   postgres_data: {}
-  
